@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    tools:context=".login">
+
+
+    <EditText
+        android:id="@+id/password1"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:background="@drawable/box"
+        android:ems="10"
+        android:textSize="18sp"
+        android:hint="@string/enter_password_here"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68" />
+
+    <EditText
+        android:id="@+id/Email1"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:background="@drawable/box"
+        android:ems="10"
+        android:hint="@string/enter_email_here"
+        android:importantForAutofill="no"
+        android:textSize="18sp"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58" />
+
+    <TextView
+        android:id="@+id/Edoc4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/e_doc"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView4"
+        android:layout_width="344dp"
+        android:layout_height="299dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="doc.json"
+        app:lottie_loop="true" />
+
+    <LinearLayout
+        android:id="@+id/Login"
+        android:onClick="Login"
+        android:layout_width="330dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.80"
+        android:background="@drawable/button_shape"
+        android:elevation="10dp">
+
+        <ImageView
+            android:layout_width="90dp"
+            android:layout_height="55dp"
+            android:src="@drawable/icon"
+            android:paddingStart="25dp"
+            android:foregroundGravity="center"
+            android:contentDescription="@string/todo"
+            tools:ignore="RtlSymmetry" />
+
+        <TextView
+            android:layout_width="240dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:paddingEnd="20dp"
+            android:textColor="#FFFFFF"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textSize="28sp"
+            tools:ignore="RtlSymmetry" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Forget_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="Sent_password"
+        android:text="@string/forgot_password_reset"
+        android:textSize="18sp"
+        android:textColor="#0000FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.875" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.80" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

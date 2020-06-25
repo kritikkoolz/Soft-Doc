@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">Soft-Doc</string>
+    <string name="todo">TODO</string>
+    <string name="e_doc">Soft-Doc</string>
+    <string name="add_new_document">Add New Document</string>
+    <string name="update_existing_document">Update existing Document</string>
+    <string name="view_existing_document">View Existing Document</string>
+    <string name="plus">+</string>
+    <string name="enter_id_holder_name">Enter Id Holder Name</string>
+    <string name="enter_unique_id_no">Enter Unique Id No.</string>
+    <string name="select_image">Select Image</string>
+    <string name="register">REGISTER</string>
+    <string name="login">LOGIN</string>
+    <string name="enter_password_here">Enter Password Here!</string>
+    <string name="enter_email_here">Enter Email Here!</string>
+    <string name="click_here_to_view">Click Here To View</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="title">Title</string>
+    <string name="tap_document_to_view">Tap Document To View</string>
+    <string name="id_holder_name">Id Holder Name</string>
+    <string name="unique_id_no">Unique ID No.</string>
+    <string name="update_document">Update Document</string>
+    <string name="delete_document">Delete Document</string>
+    <string name="login_at_soft_doc">LOGIN at Soft-Doc</string>
+    <string name="register_at_soft_doc">REGISTER AT Soft-DOC</string>
+    <string name="update_image">Update image</string>
+    <string name="blank" />
+    <string name="send_feedback">Send Feedback</string>
+    <string name="back">back</string>
+    <string name="new_user">new user ? Register Here</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="sign_in_with_facebook">Sign In with Facebook</string>
+    <string name="facebook_app_id">1327544150768395</string>
+    <string name="fb_login_protocol_scheme">fb1327544150768395</string>
+    <string name="verification_email_sent_successfully">Verification Email Sent Successfully.</string>
+    <string name="email_verification_successfully">Email Verification Successfully</string>
+    <string name="resent_verification_email">Resend Verification Email</string>
+    <string name="email_not_verified_click_to_sent">Email not Verified! Click to Sent</string>
+    <string name="cancel">Cancel</string>
+    <string name="enter_username_here">Enter Username Here!</string>
+    <string name="forgot_password_reset">Forgot Password ? Reset</string>
+    <string name="ok">OK</string>
+    <string name="verify_email_and_then_login_again">Verify Email And Then Login Again !</string>
+    <string name="password_reset_email_sent_successfully">Password Reset Email Sent Successfully</string>
+    <string name="change_password_and_then_login_again">Change Password And Then Login Again !</string>
+    <string name="resent_email">Resent Email</string>
+    <string-array name="Choose">
+        <item>Choose Document</item>
+        <item>Adhaar Card</item>
+        <item>Pan Card</item>
+        <item>ID Card</item>
+        <item>Passport</item>
+        <item>Photograph</item>
+        <item>Voter ID Card</item>
+        <item>Driving Licence</item>
+        <item>Birth Certificate</item>
+        <item>10th Marksheet</item>
+        <item>12th Marksheet</item>
+    </string-array>
+</resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "553214878323",
+    "firebase_url": "https://e-doc-a677f.firebaseio.com",
+    "project_id": "e-doc-a677f",
+    "storage_bucket": "e-doc-a677f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553214878323:android:785900927e12f951330006",
+        "android_client_info": {
+          "package_name": "com.koolz.edoc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "553214878323-3r1oirk6dvin3mk2vd9eh7d72u6vktem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.koolz.edoc",
+            "certificate_hash": "e8c93278357ed895d184191c3dddf9164c79f048"
+          }
+        },
+        {
+          "client_id": "553214878323-gq5k8sdc8lslv33j4u9aib8e9a9urcd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7-fNZOngqSe3T2rDv5XibgPLStjZmYPw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "553214878323-gq5k8sdc8lslv33j4u9aib8e9a9urcd9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
