@@ -3,29 +3,30 @@ package com.koolz.edoc;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.text.Editable;
 import android.text.TextUtils;
-import android.util.Log;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -36,24 +37,75 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Register extends AppCompatActivity {
 
-    private EditText e1;
-    private EditText e2;
-    private EditText e3;
+    private TextInputLayout e1;
+    private TextInputEditText e21;
+    private TextInputEditText e31;
+    private TextInputLayout e2;
+    private TextInputLayout e3;
     private ProgressBar pb;
     private LinearLayout b1;
     private FirebaseUser user;
     private FirebaseAuth auth;
-    private String TAG="UNSUCESSFULL";
     private String username;
+    private BottomNavigationView bottomNavigationView;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        e1=(EditText) findViewById(R.id.Email);
-        e2=(EditText) findViewById(R.id.password);
-        e3=(EditText) findViewById(R.id.username);
+        e1=(TextInputLayout) findViewById(R.id.Email);
+        e2=(TextInputLayout) findViewById(R.id.password);
+        e3=(TextInputLayout) findViewById(R.id.username);
+        e21=(TextInputEditText) findViewById(R.id.password_ed);
+        e21.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > e2.getCounterMaxLength())
+                    e2.setError("Max character length is " + e2.getCounterMaxLength());
+                else
+                    e2.setError(null);
+            }
+        });
+        e31=(TextInputEditText) findViewById(R.id.username_ed);
+        e31.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > e3.getCounterMaxLength())
+                    e3.setError("Max character length is " + e3.getCounterMaxLength());
+                else
+                    e3.setError(null);
+            }
+        });
+        bottomNavigationView=findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.Register_with_email);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.Register_with_email:
+                        return true;
+                    case R.id.Register_with_Ph_no:
+                        startActivity(new Intent(Register.this,Register_sms.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                }
+                return false;
+            }
+        });
         auth=FirebaseAuth.getInstance();
         pb=(ProgressBar)findViewById(R.id.progressBar1);
         b1=(LinearLayout) findViewById(R.id.Register2);
@@ -69,14 +121,20 @@ public class Register extends AppCompatActivity {
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
     }
     public void register(View view){
-        String email = e1.getText().toString();
-        String password = e2.getText().toString();
-        username = e3.getText().toString();
+        String email = e1.getEditText().getText().toString();
+        String password = e2.getEditText().getText().toString();
+        username = e3.getEditText().getText().toString();
         if(TextUtils.isEmpty(email)||TextUtils.isEmpty(password)||TextUtils.isEmpty(username)){
             Toast.makeText(this,"Empty Credentials",Toast.LENGTH_LONG).show();
         }
         else if (password.length()<8){
             Toast.makeText(this,"Password Must Be Of Length 8",Toast.LENGTH_LONG).show();
+        }
+        else if(password.length()>20){
+            e2.setError("Max character length is " + e2.getCounterMaxLength());
+        }
+        else if(username.length()>20){
+            e3.setError("Max character length is " + e3.getCounterMaxLength());
         }
         else {
             register_user(email,password);
@@ -137,7 +195,6 @@ public class Register extends AppCompatActivity {
                         b1.setEnabled(true);
                     }
                     catch (Exception e) {
-                        Log.d(TAG, "onComplete: " + e.getMessage());
                     }
                 }
             }
@@ -150,8 +207,13 @@ public class Register extends AppCompatActivity {
         builder.setView(dialogView);
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.setCancelable(false);
+        TextView tv=(TextView)dialogView.findViewById(R.id.customtv);
+        tv.setText(getResources().getString(R.string.verification_email_sent_successfully));
+        TextView tv2=(TextView)dialogView.findViewById(R.id.customtv1);
+        tv2.setText(getResources().getString(R.string.verify_email_and_then_login_again));
         Button bt = (Button) dialogView.findViewById(R.id.buttonOk);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override

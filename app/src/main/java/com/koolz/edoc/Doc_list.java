@@ -17,8 +17,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,12 +30,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class Doc_list extends AppCompatActivity {
     private ArrayList<String> Document;
     private String user_id;
     private String ID;
     private ProgressDialog pd;
     private boolean list;
+    private int providerId=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,8 +46,22 @@ public class Doc_list extends AppCompatActivity {
         Intent intent3=getIntent();
         list=intent3.getBooleanExtra("list",false);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user_id=user.getUid();
-        ID=user.getEmail();
+        if(user!=null){
+            ID=user.getEmail();
+            user_id=user.getUid();
+            List<? extends UserInfo> infos = user.getProviderData();
+            for (UserInfo ui : infos) {
+                if (ui.getProviderId().equals(GoogleAuthProvider.PROVIDER_ID)) {
+                    providerId=1;
+                }
+                if (ui.getProviderId().equals(FacebookAuthProvider.PROVIDER_ID)) {
+                    providerId=2;
+
+                }
+                if(ui.getProviderId().equals(FirebaseAuthProvider.PROVIDER_ID)) {
+                    providerId = 3;
+                }
+            }}
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action);
@@ -48,11 +69,11 @@ public class Doc_list extends AppCompatActivity {
         ImageView img= (ImageView) view.findViewById(R.id.image_view);
         img.setImageResource(R.drawable.list2);
         TextView textView=(TextView)view.findViewById(R.id.name);
-        textView.setText(ID);
+        textView.setText(user.getDisplayName());
         final ListView Doc_list =(ListView) findViewById(R.id.doc_list);
         Document = new ArrayList<>();
         pd =new ProgressDialog(this);
-        pd.setMessage("Adding Document info..");
+        pd.setMessage("Adding Document info...");
         pd.show();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

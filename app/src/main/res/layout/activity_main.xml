@@ -9,11 +9,11 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView1"
-        android:layout_width="350dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -97,11 +97,11 @@
         android:id="@+id/Edoc1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/e_doc"
+        android:text="@string/soft_doc"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -140,13 +140,12 @@
             tools:ignore="RtlSymmetry" />
     </LinearLayout>
 
-    <Button
+    <LinearLayout
         android:id="@+id/Register"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:background="@drawable/button_back"
         android:onClick="Register1"
-        android:text="@string/new_user"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -155,6 +154,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        android:textAllCaps="false"/>
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:text="@string/new_user"
+            android:textAllCaps="false"
+            android:textSize="20sp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

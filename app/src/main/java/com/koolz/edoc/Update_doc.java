@@ -4,24 +4,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.github.chrisbanes.photoview.PhotoView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthProvider;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,9 +40,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
+import com.scanlibrary.ScanActivity;
+import com.scanlibrary.ScanConstants;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 public class Update_doc extends AppCompatActivity {
     private String Doc;
@@ -41,7 +54,7 @@ public class Update_doc extends AppCompatActivity {
     private TextView Tv1;
     private EditText Ed1;
     private EditText Ed2;
-    private ImageView Iv;
+    private PhotoView Iv;
     private ProgressDialog pd;
     private ProgressDialog pd1;
     private String t1;
@@ -51,16 +64,34 @@ public class Update_doc extends AppCompatActivity {
     private byte[] data1;
     private UploadTask uploadTask;
     private final long One_MEGABYTE = 1024 * 1024;
-    static final int REQUEST_IMAGE_CAPTURE=1;
     private boolean del=false;
+    private int providerId=0;
+    private MediaPlayer add_music;
+    private Uri PicUri;
+    private static final int REQUEST_IMAGE_SELECT=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_doc);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        user_id=user.getUid();
-        ID=user.getEmail();
+        if(user!=null){
+            ID=user.getEmail();
+            user_id=user.getUid();
+            List<? extends UserInfo> infos = user.getProviderData();
+            for (UserInfo ui : infos) {
+                if (ui.getProviderId().equals(GoogleAuthProvider.PROVIDER_ID)) {
+                    providerId=1;
+                }
+                if (ui.getProviderId().equals(FacebookAuthProvider.PROVIDER_ID)) {
+                    providerId=2;
+
+                }
+                if(ui.getProviderId().equals(FirebaseAuthProvider.PROVIDER_ID)) {
+                    providerId = 3;
+                }
+            }}
+        add_music=MediaPlayer.create(this,R.raw.add);
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action);
@@ -68,14 +99,14 @@ public class Update_doc extends AppCompatActivity {
         ImageView img= (ImageView) view.findViewById(R.id.image_view);
         img.setImageResource(R.drawable.update_d);
         TextView textView=(TextView)view.findViewById(R.id.name);
-        textView.setText(ID);
+        textView.setText(user.getDisplayName());
         Intent intent= getIntent();
         Doc=intent.getStringExtra("document");
         Tv1 = (TextView)findViewById(R.id.tv);
         Tv1.setText("Update "+Doc);
         Ed1=(EditText)findViewById(R.id.ed1);
         Ed2=(EditText)findViewById(R.id.ed2);
-        Iv=(ImageView)findViewById(R.id.iv);
+        Iv=(PhotoView) findViewById(R.id.iv);
         pd=new ProgressDialog(this);
         baos = new ByteArrayOutputStream();
         pd.setMessage("Loading "+Doc+" for Update..");
@@ -121,25 +152,69 @@ public class Update_doc extends AppCompatActivity {
             }
         });
     }
-    public void Update_img(View view){
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+    public void Update_img(View view) {
+        showCustomDialog();
+    }
+    private void showCustomDialog() {
+        ViewGroup viewGroup = findViewById(android.R.id.content);
+        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_option, viewGroup, false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+        alertDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCancelable(false);
+        Button bt= (Button) dialogView.findViewById(R.id.Cancel);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+        LinearLayout Take= (LinearLayout) dialogView.findViewById(R.id.Take_photo);
+        Take.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                int preference = ScanConstants.OPEN_CAMERA;
+                Intent intent = new Intent(Update_doc.this, ScanActivity.class);
+                intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+                startActivityForResult(intent,REQUEST_IMAGE_SELECT);
+
+            }
+        });
+        LinearLayout Select= (LinearLayout) dialogView.findViewById(R.id.Select_image);
+        Select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                int preference = ScanConstants.OPEN_MEDIA;
+                Intent intent = new Intent(Update_doc.this, ScanActivity.class);
+                intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
+                startActivityForResult(intent,REQUEST_IMAGE_SELECT);
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            bt = (Bitmap) extras.get("data");
+        if (requestCode == REQUEST_IMAGE_SELECT && resultCode == RESULT_OK) {
+            PicUri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+            try {
+                bt = MediaStore.Images.Media.getBitmap(this.getContentResolver(), PicUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Bitmap b = Bitmap.createScaledBitmap(bt,Iv.getWidth(),Iv.getHeight(),true);
             boolean bitmap;
             bitmap = b.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             data1 = baos.toByteArray();
             Iv.setImageBitmap(b);
             del=true;
+
         }
     }
-
     public void Update(View view){
         pd1=new ProgressDialog(this);
         pd1.setMessage("Updating "+Doc+" ..");
@@ -155,6 +230,7 @@ public class Update_doc extends AppCompatActivity {
                 uploadTask = (UploadTask) stref.putBytes(data1).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        add_music.start();
                         Toast.makeText(getApplicationContext(), "Document Updated", Toast.LENGTH_SHORT).show();
                         pd1.dismiss();
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);

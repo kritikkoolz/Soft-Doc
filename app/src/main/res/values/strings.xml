@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Soft-Doc</string>
     <string name="todo">TODO</string>
-    <string name="e_doc">Soft-Doc</string>
+    <string name="soft_doc">Soft-Doc</string>
     <string name="add_new_document">Add New Document</string>
     <string name="update_existing_document">Update existing Document</string>
     <string name="view_existing_document">View Existing Document</string>
-    <string name="plus">+</string>
     <string name="enter_id_holder_name">Enter Id Holder Name</string>
     <string name="enter_unique_id_no">Enter Unique Id No.</string>
-    <string name="select_image">Select Image</string>
+    <string name="select_image">SELECT IMAGE</string>
     <string name="register">REGISTER</string>
     <string name="login">LOGIN</string>
     <string name="enter_password_here">Enter Password Here!</string>
@@ -34,7 +33,7 @@
     <string name="fb_login_protocol_scheme">fb1327544150768395</string>
     <string name="verification_email_sent_successfully">Verification Email Sent Successfully.</string>
     <string name="email_verification_successfully">Email Verification Successfully</string>
-    <string name="resent_verification_email">Resend Verification Email</string>
+    <string name="resent_verification_email">Resend Email</string>
     <string name="email_not_verified_click_to_sent">Email not Verified! Click to Sent</string>
     <string name="cancel">Cancel</string>
     <string name="enter_username_here">Enter Username Here!</string>
@@ -44,6 +43,24 @@
     <string name="password_reset_email_sent_successfully">Password Reset Email Sent Successfully</string>
     <string name="change_password_and_then_login_again">Change Password And Then Login Again !</string>
     <string name="resent_email">Resent Email</string>
+    <string name="add_this_doc">Add This Doc</string>
+    <string name="register_with_email">Register With Email</string>
+    <string name="register_with_phone_no">Register With Phone No.</string>
+    <string name="enter_phone_no">Enter Phone No.</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="code">Code</string>
+    <string name="login_with_phone_no">Login With Phone No.</string>
+    <string name="login_with_email">Login With Email</string>
+    <string name="select_from_gallery">Select From Gallery</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="settings">Settings</string>
+    <string name="change_username">Change Username</string>
+    <string name="username_changes_successfully">Username Changes Successfully !</string>
+    <string name="restart_application_now">Restart Application Now..</string>
+    <string name="software_documentation">Software Documentation</string>
     <string-array name="Choose">
         <item>Choose Document</item>
         <item>Adhaar Card</item>

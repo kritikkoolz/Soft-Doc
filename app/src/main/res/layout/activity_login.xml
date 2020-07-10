@@ -7,61 +7,94 @@
     android:background="@drawable/back"
     tools:context=".login">
 
-
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password1"
-        android:layout_width="330dp"
-        android:layout_height="50dp"
-        android:background="@drawable/box"
-        android:ems="10"
-        android:textSize="18sp"
-        android:hint="@string/enter_password_here"
-        android:importantForAutofill="no"
-        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="@color/myGreen"
+        app:hintTextAppearance="@style/HintText"
+        app:boxStrokeColor="@color/my_red1"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:errorEnabled="true"
+        app:errorTextAppearance="@style/ErrorText"
+        app:errorTextColor="@color/colorPrimary"
+        app:counterTextAppearance="@style/CounterText"
+        app:counterOverflowTextColor="@color/colorPrimary"
+        style="@style/LoginTextInputLayoutStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.70"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:startIconDrawable="@drawable/password_24"
+        app:passwordToggleEnabled="true">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/password_ed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_password_here"
+        android:inputType="textPassword"
+        android:textSize="18sp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Email1"
-        android:layout_width="330dp"
-        android:layout_height="50dp"
-        android:background="@drawable/box"
-        android:ems="10"
-        android:hint="@string/enter_email_here"
-        android:importantForAutofill="no"
-        android:textSize="18sp"
-        android:inputType="textEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxBackgroundMode="filled"
+        app:boxBackgroundColor="#FFFFFF"
+        app:hintTextColor="@color/myGreen"
+        app:hintTextAppearance="@style/HintText"
+        app:boxStrokeColor="@color/my_red1"
+        app:endIconMode="clear_text"
+        style="@style/LoginTextInputLayoutStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:startIconDrawable="@drawable/email"
+        app:layout_constraintVertical_bias="0.58">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:inputType="textEmailAddress"
+            android:hint="@string/enter_email_here"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/Edoc4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/e_doc"
+        android:text="@string/soft_doc"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView4"
-        android:layout_width="344dp"
-        android:layout_height="299dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
@@ -73,7 +106,7 @@
         android:id="@+id/Login"
         android:onClick="Login"
         android:layout_width="330dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,7 +117,7 @@
 
         <ImageView
             android:layout_width="90dp"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:src="@drawable/icon"
             android:paddingStart="25dp"
             android:foregroundGravity="center"
@@ -93,7 +126,7 @@
 
         <TextView
             android:layout_width="240dp"
-            android:layout_height="55dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:textStyle="bold"
             android:paddingEnd="20dp"
@@ -117,18 +150,36 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.875" />
+        app:layout_constraintVertical_bias="0.86" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/Login"
+        app:layout_constraintEnd_toEndOf="@id/Login"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@id/Login"
+        app:layout_constraintTop_toTopOf="@id/Login"
+        app:layout_constraintVertical_bias="0.82"
+        android:visibility="invisible"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.80" />
+        android:background="@drawable/button_back"
+        app:itemTextColor="@drawable/selector"
+        app:itemIconTint="@drawable/selector"
+        app:layout_constraintVertical_bias="1"
+        app:menu="@menu/nav_menu1"
+        android:elevation="10dp"
+        app:itemTextAppearanceInactive="@style/MenuItems1"
+        app:itemTextAppearanceActive="@style/MenuItems"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

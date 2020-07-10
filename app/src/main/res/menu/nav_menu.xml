@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/Register_with_email"
+        android:title="@string/register_with_email"
+        android:icon="@drawable/email"/>
+
+    <item android:id="@+id/Register_with_Ph_no"
+        android:title="@string/register_with_phone_no"
+        android:icon="@drawable/sms"/>
+
+
+</menu>
