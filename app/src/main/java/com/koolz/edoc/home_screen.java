@@ -57,25 +57,25 @@ public class home_screen extends AppCompatActivity {
         setContentView(R.layout.activity_home_screen);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user!=null){
-        Id=user.getEmail();
-        user_id=user.getUid();
-        pd1=new ProgressDialog(this);
-        List<? extends UserInfo> infos = user.getProviderData();
-        for (UserInfo ui : infos) {
-            if (ui.getProviderId().equals(GoogleAuthProvider.PROVIDER_ID)) {
-                providerId=1;
-            }
-            if (ui.getProviderId().equals(FacebookAuthProvider.PROVIDER_ID)) {
-                providerId=2;
+            Id=user.getEmail();
+            user_id=user.getUid();
+            pd1=new ProgressDialog(this);
+            List<? extends UserInfo> infos = user.getProviderData();
+            for (UserInfo ui : infos) {
+                if (ui.getProviderId().equals(GoogleAuthProvider.PROVIDER_ID)) {
+                    providerId=1;
+                }
+                if (ui.getProviderId().equals(FacebookAuthProvider.PROVIDER_ID)) {
+                    providerId=2;
 
-            }
-            if(ui.getProviderId().equals(EmailAuthProvider.PROVIDER_ID)) {
-                providerId=3;
-            }
-            if(ui.getProviderId().equals(PhoneAuthProvider.PROVIDER_ID)){
-                providerId=4;
-            }
-        }}
+                }
+                if(ui.getProviderId().equals(EmailAuthProvider.PROVIDER_ID)) {
+                    providerId=3;
+                }
+                if(ui.getProviderId().equals(PhoneAuthProvider.PROVIDER_ID)){
+                    providerId=4;
+                }
+            }}
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayShowCustomEnabled(true);
         getSupportActionBar().setCustomView(R.layout.custom_action);
@@ -108,7 +108,7 @@ public class home_screen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sign_out:
-                if (providerId==1){
+                if (providerId==1||providerId==3){
                     signOut_g();
                     user_to_home();
                 }
@@ -133,7 +133,7 @@ public class home_screen extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         if(TextUtils.isEmpty(input.getText().toString())){
                             Toast.makeText(home_screen.this,"Empty Field",Toast.LENGTH_LONG).show();
-                    }
+                        }
                         else {
                             FirebaseDatabase.getInstance().getReference().child(user_id).child("feedback").push().setValue(input.getText().toString());
                             showCustomDialog();
@@ -199,7 +199,7 @@ public class home_screen extends AppCompatActivity {
                                                         user_to_home();
                                                     }
                                                 });
-                                                }
+                                            }
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -255,7 +255,7 @@ public class home_screen extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                               showCustomDialog_tick();
+                                                showCustomDialog_tick();
                                             }
                                         }
                                     });
@@ -442,7 +442,7 @@ public class home_screen extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         if (user!=null){
-         user_exit();
+            user_exit();
         }
         else {
             user_to_home();
