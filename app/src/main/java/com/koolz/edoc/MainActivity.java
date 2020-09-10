@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity{
                 firebaseAuthWithGoogle(account.getIdToken());
                 progress.show();
             } catch (ApiException e) {
-                Toast.makeText(MainActivity.this,"Sign Failed",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
             }
         }
         else if(SIGN_IN==2) {
