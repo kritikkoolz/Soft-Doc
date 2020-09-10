@@ -76,8 +76,8 @@ public class MainActivity extends AppCompatActivity{
                 .requestEmail()
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        }
-        private void handleFacebookAccessToken(AccessToken token) {
+    }
+    private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -196,10 +196,10 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-            Intent intent6 = new Intent(Intent.ACTION_MAIN);
-            intent6.addCategory(Intent.CATEGORY_HOME);
-            intent6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent6);
+        Intent intent6 = new Intent(Intent.ACTION_MAIN);
+        intent6.addCategory(Intent.CATEGORY_HOME);
+        intent6.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent6);
     }
     public void sent_to_home(){
         final Intent intent = new Intent(MainActivity.this, home_screen.class);
